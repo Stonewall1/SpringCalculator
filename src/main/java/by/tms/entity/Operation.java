@@ -1,13 +1,20 @@
 package by.tms.entity;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 public class Operation {
+    @NotBlank(message = "Field cant be empty")
     private double x1;
+    @NotBlank(message = "Field cant be empty")
     private double x2;
+    @NotBlank(message = "Field cant be empty")
     private double result;
+    @NotBlank(message = "Field cant be empty")
     private String operation;
+    @NotBlank(message = "Field cant be empty")
     private User user;
+    @NotBlank(message = "Field cant be empty")
     private LocalDateTime time;
 
     public User getUser() {

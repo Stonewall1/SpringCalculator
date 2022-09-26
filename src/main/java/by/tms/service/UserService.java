@@ -11,22 +11,22 @@ import java.util.Optional;
 @Component
 public class UserService {
 
-    private UserStorage registeredUsersStorage;
+    private UserStorage userStorage;
 
     @Autowired
     public UserService(UserStorage registeredUsersStorage) {
-        this.registeredUsersStorage = registeredUsersStorage;
+        this.userStorage = registeredUsersStorage;
     }
 
     public void register(User user) {
-        registeredUsersStorage.save(user);
+        userStorage.save(user);
     }
 
     public Optional<User> findByEmail(String email) {
-        return registeredUsersStorage.findByEmail(email);
+        return userStorage.findByEmail(email);
     }
 
     public List<User> getUsers() {
-        return registeredUsersStorage.getElements();
+        return userStorage.getElements();
     }
 }

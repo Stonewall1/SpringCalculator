@@ -3,6 +3,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
   <title>Calculator</title>
@@ -30,6 +31,24 @@
         <button class="btn btn-primary">Calculate</button>
         <a href="/startpage" class="btn btn-primary">Back</a>
       </form>
+
+<%--      <s:form action="/calculator" method="post" modelAttribute="op">--%>
+<%--        <s:input path="x1" placeholder="Input first number"/>--%>
+<%--        <br>--%>
+<%--        <s:errors path="x1"/>--%>
+<%--        <br>--%>
+<%--        <s:input path="x2" placeholder="Input second number"/>--%>
+<%--        <br>--%>
+<%--        <s:errors path="x2"/>--%>
+<%--        <br>--%>
+<%--        <s:input path="operation" placeholder="Input operation"/>--%>
+<%--        <br>--%>
+<%--        <s:errors path="operation"/>--%>
+<%--        <br>--%>
+<%--        <s:button  class="btn btn-primary"> Calculate</s:button>--%>
+<%--        <a href="/startpage" class="btn btn-primary">Back</a>--%>
+<%--      </s:form>--%>
+
       <p>${message}</p>
       <p>${result}</p>
 

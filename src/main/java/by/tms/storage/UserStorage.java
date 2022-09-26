@@ -20,12 +20,7 @@ public class UserStorage implements InMemoryStorage<User>{
     }
 
     public Optional<User> findByEmail(String email) {
-        for (User user : users) {
-            if (user.getEmail().equals(email)) {
-                return Optional.of(user);
-            }
-        }
-        return Optional.empty();
+        return users.stream().filter(user -> user.getEmail().equals(email)).findFirst();
     }
     @Override
     public List<User> getElements() {
