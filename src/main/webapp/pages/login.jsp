@@ -18,7 +18,7 @@
         <input type="email" name="email" placeholder="Enter email"/>
         <input type="password" name="password" placeholder="Enter password"/>
         <button class="btn btn-primary">Login</button>
-        <a href="/" class="btn btn-primary">Back</a>
+        <a href="/startpage" class="btn btn-primary">Back</a>
       </form>
       <p>${message}</p>
 

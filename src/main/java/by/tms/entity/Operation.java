@@ -28,6 +28,13 @@ public class Operation {
         this.operation = operation;
     }
 
+    public Operation(double x1, double x2, String operation, LocalDateTime time) {
+        this.x1 = x1;
+        this.x2 = x2;
+        this.operation = operation;
+        this.time = time;
+    }
+
     public String getOperation() {
         return operation;
     }

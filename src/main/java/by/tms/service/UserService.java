@@ -2,26 +2,21 @@ package by.tms.service;
 
 import by.tms.entity.User;
 import by.tms.storage.UserStorage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
+
 @Component
-public class RegistrationService {
-    private static RegistrationService instance;
+public class UserService {
 
-    private RegistrationService() {
+    private UserStorage registeredUsersStorage;
 
+    @Autowired
+    public UserService(UserStorage registeredUsersStorage) {
+        this.registeredUsersStorage = registeredUsersStorage;
     }
-
-    public static RegistrationService getInstance() {
-        if (instance == null) {
-            instance = new RegistrationService();
-        }
-        return instance;
-    }
-
-    private final UserStorage registeredUsersStorage = UserStorage.getInstance();
 
     public void register(User user) {
         registeredUsersStorage.save(user);

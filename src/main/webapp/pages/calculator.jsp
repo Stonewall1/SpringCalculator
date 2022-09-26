@@ -28,7 +28,7 @@
         <input type="number" name="x2" placeholder="Input second number">
         <input type="text" name="operation" placeholder="Operation">
         <button class="btn btn-primary">Calculate</button>
-        <a href="/" class="btn btn-primary">Back</a>
+        <a href="/startpage" class="btn btn-primary">Back</a>
       </form>
       <p>${message}</p>
       <p>${result}</p>

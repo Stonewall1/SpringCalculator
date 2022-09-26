@@ -18,7 +18,7 @@
             <li><p>${operation}</p></li>
         </c:forEach>
     </ul>
-    <a href="/" class="btn btn-primary" style="margin-left: 8px">Back</a>
+    <a href="/startpage" class="btn btn-primary" style="margin-left: 8px">Back</a>
 </form>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"

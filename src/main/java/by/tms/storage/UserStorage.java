@@ -9,18 +9,6 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 @Component
 public class UserStorage implements InMemoryStorage<User>{
-    private static UserStorage instance;
-
-    private UserStorage() {
-
-    }
-
-    public static UserStorage getInstance() {
-        if (instance == null) {
-            instance = new UserStorage();
-        }
-        return instance;
-    }
 
     private final List<User> users = new ArrayList<>();
     private static final AtomicLong idGenerator = new AtomicLong(0);
