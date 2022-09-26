@@ -36,12 +36,15 @@ public class CalculatorController {
     }
 
     @GetMapping("/registration")
-    public String registration() {
+    public String registration(@ModelAttribute("newUser") User user) {
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String registration(@Valid User user, Model model) {
+    public String registration(@Valid @ModelAttribute("newUser") User user, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "registration";
+        }
         if (userService.findByEmail(user.getEmail()).isEmpty()) {
             userService.register(user);
             return "startpage";
