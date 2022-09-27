@@ -1,20 +1,21 @@
 package by.tms.entity;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public class Operation {
-    @NotBlank(message = "Field cant be empty")
-    private double x1;
-    @NotBlank(message = "Field cant be empty")
-    private double x2;
-    @NotBlank(message = "Field cant be empty")
-    private double result;
+    @NotNull(message = "Field cant be empty")
+    private Double x1;
+    @NotNull(message = "Field cant be empty")
+    private Double x2;
+
+    private Double result;
     @NotBlank(message = "Field cant be empty")
     private String operation;
-    @NotBlank(message = "Field cant be empty")
+
     private User user;
-    @NotBlank(message = "Field cant be empty")
+
     private LocalDateTime time;
 
     public User getUser() {
@@ -29,13 +30,13 @@ public class Operation {
 
     }
 
-    public Operation(double x1, double x2, String operation) {
+    public Operation(Double x1, double x2, String operation) {
         this.x1 = x1;
         this.x2 = x2;
         this.operation = operation;
     }
 
-    public Operation(double x1, double x2, String operation, LocalDateTime time) {
+    public Operation(Double x1, double x2, String operation, LocalDateTime time) {
         this.x1 = x1;
         this.x2 = x2;
         this.operation = operation;
@@ -50,27 +51,27 @@ public class Operation {
         this.operation = operation;
     }
 
-    public double getX1() {
+    public Double getX1() {
         return x1;
     }
 
-    public void setX1(double x1) {
+    public void setX1(Double x1) {
         this.x1 = x1;
     }
 
-    public double getX2() {
+    public Double getX2() {
         return x2;
     }
 
-    public void setX2(double x2) {
+    public void setX2(Double x2) {
         this.x2 = x2;
     }
 
-    public double getResult() {
+    public Double getResult() {
         return result;
     }
 
-    public void setResult(double result) {
+    public void setResult(Double result) {
         this.result = result;
     }
 

@@ -77,15 +77,15 @@ public class CalculatorController {
 
 
     @GetMapping("/calculator")
-    public String calculator() {
+    public String calculator(@ModelAttribute("op") Operation operation) {
         return "calculator";
     }
 
     @PostMapping("/calculator")
-    public String calculator(@Valid Operation operation, Model model, HttpSession session, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
-//            return "calculator";
-//        }
+    public String calculator(@Valid @ModelAttribute("op") Operation operation, BindingResult bindingResult ,  Model model, HttpSession session) {
+        if (bindingResult.hasErrors()) {
+            return "calculator";
+        }
         User user = (User) session.getAttribute("currentUser");
         model.addAttribute("result", calculatorService.calculate(operation, user));
         return "calculator";
