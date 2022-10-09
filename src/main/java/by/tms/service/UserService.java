@@ -34,4 +34,8 @@ public class UserService {
     public Optional<User> findUserByEmail(String email){
         return userStorage.findEntity(email);
     }
+    public User delete(User user){
+        userStorage.delete(user);
+        return user;
+    }
 }

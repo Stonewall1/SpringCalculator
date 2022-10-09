@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component("OperationStorage")
-public class OperationStorage implements InMemoryStorage<Operation , Long> {
+public class OperationStorage implements InMemoryStorage<Operation, Long> {
     private final List<Operation> operations = new ArrayList<>();
 
     @Override
@@ -19,16 +19,13 @@ public class OperationStorage implements InMemoryStorage<Operation , Long> {
 
     @Override
     public Optional<Operation> findById(Long id) {
-        return operations.stream().filter(operation -> operation.getId() ==id).findFirst();
+        return operations.stream().filter(operation -> operation.getId() == id).findFirst();
     }
-    /**
-     * toDO
-     * @param entity
-     * @return
-     */
+
     @Override
     public Operation delete(Operation entity) {
-        return null;
+        operations.remove(entity);
+        return entity;
     }
 
     @Override

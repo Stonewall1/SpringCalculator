@@ -47,4 +47,8 @@ public class CalculatorService {
     public Optional<Operation> findOperationById(String id){
         return operationStorage.findEntity(id);
     }
+    public Operation delete(Operation operation){
+        operationStorage.delete(operation);
+        return operation;
+    }
 }

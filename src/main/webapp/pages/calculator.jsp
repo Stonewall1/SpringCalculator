@@ -10,12 +10,6 @@
 </head>
 <body>
 <h3>Operations setup</h3>
-<ul>
-    <li>sum - addition</li>
-    <li>sub - subtraction</li>
-    <li>mul - multiplication</li>
-    <li>div - division</li>
-</ul>
 <s:form action="/calculator" method="post" modelAttribute="op">
     <s:input path="x1" placeholder="Input first number"/>
     <br>
@@ -25,10 +19,10 @@
     <br>
     <s:errors path="x2" cssStyle="color: red"/>
     <br>
-    <s:input path="operation" placeholder="Input operation"/>
-    <br>
-    <s:errors path="operation" cssStyle="color: red"/>
-    <br>
+    <s:radiobutton path="operation" value="sum"/> Addition<br/>
+    <s:radiobutton path="operation" value="sub"/> Subtraction<br/>
+    <s:radiobutton path="operation" value="mul"/> Multiplication<br/>
+    <s:radiobutton path="operation" value="div"/> Division<br/>
     <s:button class="btn btn-primary"> Calculate</s:button>
     <a href="/startpage" class="btn btn-primary">Back</a>
 </s:form>

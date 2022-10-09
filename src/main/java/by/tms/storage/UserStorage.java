@@ -26,15 +26,10 @@ public class UserStorage implements InMemoryStorage<User, Long> {
         return users.stream().filter(user -> user.getId() == id).findFirst();
     }
 
-    /**
-     * toDo
-     *
-     * @param entity
-     * @return
-     */
     @Override
     public User delete(User entity) {
-        return null;
+        users.remove(entity);
+        return entity;
     }
 
     @Override
