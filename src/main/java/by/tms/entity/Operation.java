@@ -1,10 +1,14 @@
 package by.tms.entity;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-
+@Entity
+@Table(name = "operations")
 public class Operation {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotNull(message = "Field cant be empty")
     private Double x1;
@@ -14,17 +18,17 @@ public class Operation {
     @NotBlank(message = "Field cant be empty")
     private String operation;
 
-    private User user;
+//    private User user;
 
     private LocalDateTime time;
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public Operation() {
 

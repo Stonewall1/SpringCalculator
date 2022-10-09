@@ -31,7 +31,7 @@ public class CalculatorService {
             default -> {
             }
         }
-        operation.setUser(user);
+//        operation.setUser(user);
         operation.setResult(result);
         operation.setTime(LocalDateTime.now());
         return operationStorage.save(operation);
@@ -41,9 +41,9 @@ public class CalculatorService {
         return operationStorage.getElements();
     }
 
-    public List<Operation> getOperationsByUserId(User user) {
-        return getOperations().stream().filter(operation -> operation.getUser().getId() == user.getId()).toList();
-    }
+//    public List<Operation> getOperationsByUserId(User user) {
+//        return getOperations().stream().filter(operation -> operation.getUser().getId() == user.getId()).toList();
+//    }
     public Optional<Operation> findOperationById(String id){
         return operationStorage.findEntity(id);
     }
