@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
-@Component
-public class UserStorage implements InMemoryStorage<User>{
+
+@Component("UserStorage")
+public class UserStorage implements InMemoryStorage<User, Long> {
 
     private final List<User> users = new ArrayList<>();
-    private static final AtomicLong idGenerator = new AtomicLong(0);
+    private final AtomicLong idGenerator = new AtomicLong(0);
+
     @Override
     public User save(User user) {
         user.setId(idGenerator.incrementAndGet());
@@ -19,11 +21,34 @@ public class UserStorage implements InMemoryStorage<User>{
         return user;
     }
 
-    public Optional<User> findByEmail(String email) {
-        return users.stream().filter(user -> user.getEmail().equals(email)).findFirst();
+    @Override
+    public Optional<User> findById(Long id) {
+        return users.stream().filter(user -> user.getId() == id).findFirst();
     }
+
+    /**
+     * toDo
+     *
+     * @param entity
+     * @return
+     */
+    @Override
+    public User delete(User entity) {
+        return null;
+    }
+
     @Override
     public List<User> getElements() {
         return users;
+    }
+
+    @Override
+    public Optional<User> findEntity(String email) {
+        for (User user : users) {
+            if (user.getEmail().equals(email)) {
+                return Optional.of(user);
+            }
+        }
+        return Optional.empty();
     }
 }

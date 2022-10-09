@@ -4,7 +4,6 @@ import by.tms.entity.Operation;
 import by.tms.entity.User;
 import by.tms.service.CalculatorService;
 import by.tms.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,7 +23,6 @@ public class CalculatorController {
     private final UserService userService;
     private final CalculatorService calculatorService;
 
-    @Autowired
     public CalculatorController(UserService userService, CalculatorService calculatorService) {
         this.userService = userService;
         this.calculatorService = calculatorService;
@@ -45,7 +43,7 @@ public class CalculatorController {
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-        if (userService.findByEmail(user.getEmail()).isEmpty()) {
+        if (userService.findUserByEmail(user.getEmail()).isEmpty()) {
             userService.register(user);
             return "startpage";
         }
@@ -54,16 +52,17 @@ public class CalculatorController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(@ModelAttribute("user") User user) {
         return "login";
     }
 
     @PostMapping("/login")
-    public String login(String email, String password, HttpSession session, Model model) {
-        Optional<User> byEmail = userService.findByEmail(email);
+    public String login(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, HttpSession session, Model model) {
+        Optional<User> byEmail = userService.findUserByEmail(user.getEmail());
         if (byEmail.isPresent()) {
-            if (byEmail.get().getPassword().equals(password)) {
+            if (byEmail.get().getPassword().equals(user.getPassword())) {
                 session.setAttribute("currentUser", byEmail.get());
+                return "redirect:/startpage";
             } else {
                 model.addAttribute("message", "Wrong password");
                 return "login";
@@ -72,9 +71,7 @@ public class CalculatorController {
             model.addAttribute("message", "No such user");
             return "login";
         }
-        return "startpage";
     }
-
 
     @GetMapping("/calculator")
     public String calculator(@ModelAttribute("op") Operation operation) {
@@ -82,7 +79,7 @@ public class CalculatorController {
     }
 
     @PostMapping("/calculator")
-    public String calculator(@Valid @ModelAttribute("op") Operation operation, BindingResult bindingResult ,  Model model, HttpSession session) {
+    public String calculator(@Valid @ModelAttribute("op") Operation operation, BindingResult bindingResult, Model model, HttpSession session) {
         if (bindingResult.hasErrors()) {
             return "calculator";
         }
@@ -94,10 +91,9 @@ public class CalculatorController {
     @GetMapping("/story")
     public String story(HttpSession session, Model model) {
         User user = (User) session.getAttribute("currentUser");
-        model.addAttribute("operations", calculatorService.getOperationsByUser(user));
+        model.addAttribute("operations", calculatorService.getOperationsByUserId(user));
         return "story";
     }
-
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {

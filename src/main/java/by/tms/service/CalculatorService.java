@@ -2,25 +2,26 @@ package by.tms.service;
 
 import by.tms.entity.Operation;
 import by.tms.entity.User;
+import by.tms.storage.InMemoryStorage;
 import by.tms.storage.OperationStorage;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class CalculatorService {
+    @Qualifier("OperationStorage")
+    private final InMemoryStorage<Operation, Long> operationStorage;
 
-    private OperationStorage operationStorage;
-
-    @Autowired
     public CalculatorService(OperationStorage operationStorage) {
         this.operationStorage = operationStorage;
     }
 
-    public Operation calculate(Operation operation , User user) {
+    public Operation calculate(Operation operation, User user) {
         double result = 0;
         switch (operation.getOperation()) {
             case "sum" -> result = operation.getX1() + operation.getX2();
@@ -40,13 +41,10 @@ public class CalculatorService {
         return operationStorage.getElements();
     }
 
-    public List<Operation> getOperationsByUser(User user) {
-        List<Operation> ops = new ArrayList<>();
-        for (Operation operation : getOperations()) {
-            if (operation.getUser().getId() == user.getId()) {
-                ops.add(operation);
-            }
-        }
-        return ops;
+    public List<Operation> getOperationsByUserId(User user) {
+        return getOperations().stream().filter(operation -> operation.getUser().getId() == user.getId()).toList();
+    }
+    public Optional<Operation> findOperationById(String id){
+        return operationStorage.findEntity(id);
     }
 }

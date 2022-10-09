@@ -4,12 +4,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-public class Operation {
+public class Operation extends Entity {
     @NotNull(message = "Field cant be empty")
     private Double x1;
     @NotNull(message = "Field cant be empty")
     private Double x2;
-
     private Double result;
     @NotBlank(message = "Field cant be empty")
     private String operation;
@@ -82,6 +81,15 @@ public class Operation {
     public void setTime(LocalDateTime time) {
         this.time = time;
     }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
 
     @Override
     public String toString() {
