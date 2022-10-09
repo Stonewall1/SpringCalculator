@@ -1,4 +1,4 @@
-package by.tms.storage;
+package by.tms.dao;
 
 import org.springframework.stereotype.Component;
 

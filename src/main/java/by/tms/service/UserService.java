@@ -1,8 +1,8 @@
 package by.tms.service;
 
 import by.tms.entity.User;
-import by.tms.storage.InMemoryStorage;
-import by.tms.storage.UserStorage;
+import by.tms.dao.InMemoryStorage;
+import by.tms.dao.UserStorage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;

@@ -2,24 +2,23 @@ package by.tms.service;
 
 import by.tms.entity.Operation;
 import by.tms.entity.User;
-import by.tms.storage.InMemoryStorage;
-import by.tms.storage.OperationStorage;
+import by.tms.dao.InMemoryStorage;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Component
 public class CalculatorService {
-    @Qualifier("OperationStorage")
+
     private final InMemoryStorage<Operation, Long> operationStorage;
 
-    public CalculatorService(OperationStorage operationStorage) {
+    public CalculatorService(@Qualifier("HibernateOperationDao") InMemoryStorage<Operation, Long> operationStorage) {
         this.operationStorage = operationStorage;
     }
+
 
     public Operation calculate(Operation operation, User user) {
         double result = 0;
@@ -34,7 +33,12 @@ public class CalculatorService {
 //        operation.setUser(user);
         operation.setResult(result);
         operation.setTime(LocalDateTime.now());
-        return operationStorage.save(operation);
+        save(operation);
+        return operation;
+    }
+    public Operation save(Operation operation){
+        operationStorage.save(operation);
+        return operation;
     }
 
     public List<Operation> getOperations() {
