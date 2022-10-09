@@ -3,7 +3,8 @@ package by.tms.entity;
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
-public class User extends Entity {
+public class User {
+    private long id;
     @NotBlank(message = "Field cant be empty")
     private String name;
     @NotBlank(message = "Field cant be empty")

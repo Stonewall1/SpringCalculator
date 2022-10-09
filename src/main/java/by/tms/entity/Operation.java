@@ -4,7 +4,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-public class Operation extends Entity {
+public class Operation {
+    private long id;
     @NotNull(message = "Field cant be empty")
     private Double x1;
     @NotNull(message = "Field cant be empty")

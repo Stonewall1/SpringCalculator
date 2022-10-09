@@ -1,6 +1,6 @@
 package by.tms.entity;
 
-public abstract class Entity {
+public abstract class AbstractEntity {
     long id;
 
     public long getId() {
