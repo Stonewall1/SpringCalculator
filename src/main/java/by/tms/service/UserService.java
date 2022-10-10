@@ -1,40 +1,48 @@
 package by.tms.service;
 
 import by.tms.entity.User;
-import by.tms.dao.InMemoryStorage;
-import by.tms.dao.UserStorage;
-import org.springframework.beans.factory.annotation.Autowired;
+import by.tms.dao.Storage;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Component
 public class UserService {
-    @Qualifier("UserStorage")
-    private final InMemoryStorage<User, Long> userStorage;
 
-    @Autowired
-    public UserService(UserStorage registeredUsersStorage) {
-        this.userStorage = registeredUsersStorage;
+    private final Storage<User, Long> userStorage;
+
+    /**
+     * why @Qualifier in constructor?
+     */
+    public UserService(@Qualifier("HibernateUserDao") Storage<User, Long> userStorage) {
+        this.userStorage = userStorage;
     }
 
-    public void register(User user) {
+    @Transactional
+    public void save(User user) {
         userStorage.save(user);
     }
 
+    @Transactional(readOnly = true)
     public Optional<User> findById(Long id) {
         return userStorage.findById(id);
     }
 
+    @Transactional(readOnly = true)
     public List<User> getUsers() {
         return userStorage.getElements();
     }
-    public Optional<User> findUserByEmail(String email){
+
+    @Transactional(readOnly = true)
+    public Optional<User> findUserByEmail(String email) {
         return userStorage.findEntity(email);
     }
-    public User delete(User user){
+
+    @Transactional
+    public User delete(User user) {
         userStorage.delete(user);
         return user;
     }

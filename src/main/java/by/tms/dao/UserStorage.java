@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Component("UserStorage")
-public class UserStorage implements InMemoryStorage<User, Long> {
+public class UserStorage implements Storage<User, Long> {
 
     private final List<User> users = new ArrayList<>();
     private final AtomicLong idGenerator = new AtomicLong(0);

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component("OperationStorage")
-public class OperationStorage implements InMemoryStorage<Operation, Long> {
+public class OperationStorage implements Storage<Operation, Long> {
     private final List<Operation> operations = new ArrayList<>();
 
     @Override

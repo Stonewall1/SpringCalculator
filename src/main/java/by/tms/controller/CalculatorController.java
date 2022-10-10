@@ -43,12 +43,15 @@ public class CalculatorController {
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-        if (userService.findUserByEmail(user.getEmail()).isEmpty()) {
-            userService.register(user);
+        /**
+         * how to check this? [No user for query error] if table is empty
+         */
+//        if (userService.findUserByEmail(user.getEmail()).isEmpty()) {
+            userService.save(user);
             return "startpage";
-        }
-        model.addAttribute("message", "User already exists");
-        return "registration";
+//        }
+//        model.addAttribute("message", "User already exists");
+//        return "registration";
     }
 
     @GetMapping("/login")
@@ -58,6 +61,9 @@ public class CalculatorController {
 
     @PostMapping("/login")
     public String login(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, HttpSession session, Model model) {
+        /**
+         * [cannot find user for query] if given email is not in a DB
+         */
         Optional<User> byEmail = userService.findUserByEmail(user.getEmail());
         if (byEmail.isPresent()) {
             if (byEmail.get().getPassword().equals(user.getPassword())) {

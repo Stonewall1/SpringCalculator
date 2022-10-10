@@ -2,9 +2,10 @@ package by.tms.service;
 
 import by.tms.entity.Operation;
 import by.tms.entity.User;
-import by.tms.dao.InMemoryStorage;
+import by.tms.dao.Storage;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,13 +14,17 @@ import java.util.Optional;
 @Component
 public class CalculatorService {
 
-    private final InMemoryStorage<Operation, Long> operationStorage;
+    private final Storage<Operation, Long> operationStorage;
 
-    public CalculatorService(@Qualifier("HibernateOperationDao") InMemoryStorage<Operation, Long> operationStorage) {
+    /**
+     * why @Qualifier in constructor?
+     */
+
+    public CalculatorService(@Qualifier("HibernateOperationDao") Storage<Operation, Long> operationStorage) {
         this.operationStorage = operationStorage;
     }
 
-
+    @Transactional
     public Operation calculate(Operation operation, User user) {
         double result = 0;
         switch (operation.getOperation()) {
@@ -36,22 +41,28 @@ public class CalculatorService {
         save(operation);
         return operation;
     }
-    public Operation save(Operation operation){
+
+    @Transactional
+    public Operation save(Operation operation) {
         operationStorage.save(operation);
         return operation;
     }
 
+    @Transactional(readOnly = true)
     public List<Operation> getOperations() {
         return operationStorage.getElements();
     }
 
-//    public List<Operation> getOperationsByUserId(User user) {
+    //    public List<Operation> getOperationsByUserId(User user) {
 //        return getOperations().stream().filter(operation -> operation.getUser().getId() == user.getId()).toList();
 //    }
-    public Optional<Operation> findOperationById(String id){
+    @Transactional(readOnly = true)
+    public Optional<Operation> findOperationById(String id) {
         return operationStorage.findEntity(id);
     }
-    public Operation delete(Operation operation){
+
+    @Transactional
+    public Operation delete(Operation operation) {
         operationStorage.delete(operation);
         return operation;
     }

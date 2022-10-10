@@ -1,9 +1,14 @@
 package by.tms.entity;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotBlank(message = "Field cant be empty")
     private String name;
