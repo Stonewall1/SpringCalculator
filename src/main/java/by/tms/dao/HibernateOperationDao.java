@@ -52,4 +52,10 @@ public class HibernateOperationDao implements Storage<Operation, Long> {
     public Optional<Operation> findEntity(String parameter) {
         return Optional.empty();
     }
+
+    @Override
+    public Operation updateEntity(Long aLong, String param1, String param2) {
+        return null;
+    }
+
 }

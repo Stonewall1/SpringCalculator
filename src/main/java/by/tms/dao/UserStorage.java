@@ -46,4 +46,9 @@ public class UserStorage implements Storage<User, Long> {
         }
         return Optional.empty();
     }
+
+    @Override
+    public User updateEntity(Long aLong, String param1, String param2) {
+        return null;
+    }
 }

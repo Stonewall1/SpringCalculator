@@ -42,6 +42,11 @@ public class UserService {
     }
 
     @Transactional
+    public User updateUser(Long id , String name , String password) {
+         return userStorage.updateEntity(id , name ,password);
+    }
+
+    @Transactional
     public User delete(User user) {
         userStorage.delete(user);
         return user;

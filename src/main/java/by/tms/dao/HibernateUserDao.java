@@ -3,6 +3,7 @@ package by.tms.dao;
 import by.tms.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
@@ -51,5 +52,16 @@ public class HibernateUserDao implements Storage<User, Long> {
         Session session = sessionFactory.getCurrentSession();
         User user = session.createQuery("from User where email =:x", User.class).setParameter("x", email).getSingleResult();
         return Optional.of(user);
+    }
+
+    @Override
+    public User updateEntity(Long id, String param1, String param2) {
+        Session session = sessionFactory.getCurrentSession();
+        session.createQuery("update User set name = :nameP , password =:passwordP where id =:ip")
+                .setParameter("ip", id)
+                .setParameter("nameP", param1)
+                .setParameter("passwordP", param2)
+                .executeUpdate();
+        return session.createQuery("from User where id =:x", User.class).setParameter("x", id).getSingleResult();
     }
 }

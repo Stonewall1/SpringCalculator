@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface Storage<T, ID> extends CrudDao<T, ID> {
     List<T> getElements();
     Optional<T> findEntity(String parameter);
+    T updateEntity(ID id , String param1 , String param2);
 }

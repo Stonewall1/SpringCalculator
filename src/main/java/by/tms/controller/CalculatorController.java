@@ -94,13 +94,6 @@ public class CalculatorController {
         return "calculator";
     }
 
-//    @GetMapping("/story")
-//    public String story(HttpSession session, Model model) {
-//        User user = (User) session.getAttribute("currentUser");
-//        model.addAttribute("operations", calculatorService.getOperationsByUserId(user));
-//        return "story";
-//    }
-
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();

@@ -37,4 +37,11 @@ public class OperationStorage implements Storage<Operation, Long> {
     public Optional<Operation> findEntity(String parameter) {
         return operations.stream().filter(operation -> operation.getId() == Integer.parseInt(parameter)).findFirst();
     }
+
+    @Override
+    public Operation updateEntity(Long aLong, String param1, String param2) {
+        return null;
+    }
+
+
 }
