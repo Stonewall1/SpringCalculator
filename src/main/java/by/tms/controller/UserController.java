@@ -40,11 +40,7 @@ public class UserController {
             return "editProfile";
         }
         Long id = ((User) req.getSession().getAttribute("currentUser")).getId();
-        String editedName = userDto.getName();
-        String editedPassword = userDto.getPassword();
-
-        User updatedUser = userService.updateUser(id ,editedName , editedPassword);
-        System.out.println(updatedUser);
+        User updatedUser = userService.updateUser(id ,userDto.getName() , userDto.getPassword());
         session.setAttribute("currentUser" , updatedUser);
         return "redirect:/user/profile";
     }
